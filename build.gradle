@@ -1,0 +1,73 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '2.7.14'
+	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+}
+
+group = 'com.polarbookshop'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	sourceCompatibility = '17'
+}
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+ext {
+	set('springCloudVersion', "2021.0.8")
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter'
+	implementation 'org.springframework.cloud:spring-cloud-starter-config'
+	implementation 'org.springframework.cloud:spring-cloud-stream-binder-rabbit'
+	implementation 'org.springframework.retry:spring-retry'
+
+	compileOnly 'org.projectlombok:lombok'
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	annotationProcessor 'org.projectlombok:lombok'
+	
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'io.projectreactor:reactor-test'
+	testImplementation('org.springframework.cloud:spring-cloud-stream') {
+		artifact {
+		    name = "spring-cloud-stream"
+		    extension = "jar"
+		    type = "test-jar"
+		    classifier = "test-binder"
+		}
+	}
+
+}
+
+dependencyManagement {
+	imports {
+		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+	}
+}
+
+bootBuildImage {
+	imageName = "${project.name}"
+	buildpacks = ["paketobuildpacks/adoptium:latest", "urn:cnb:builder:paketo-buildpacks/java"]
+	environment = ["BP_JVM_VERSION": "17.*"]
+
+	docker {
+		publishRegistry {
+			username = project.findProperty("registryUsername")
+			password = project.findProperty("registryToken")
+			url = project.findProperty("registryUrl")
+		}
+	}
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
