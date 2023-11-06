@@ -1,4 +1,4 @@
-package om.polarbookshop.dispatcher;
+package com.polarbookshop.dispatcher;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -15,9 +15,8 @@ import org.springframework.messaging.Message;
 import org.springframework.messaging.support.MessageBuilder;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-
-import om.polarbookshop.dispatcher.event.OrderAcceptedMessage;
-import om.polarbookshop.dispatcher.event.OrderDispatchedMessage;
+import com.polarbookshop.dispatcher.event.OrderAcceptedMessage;
+import com.polarbookshop.dispatcher.event.OrderDispatchedMessage;
 
 @SpringBootTest
 @Import(TestChannelBinderConfiguration.class)

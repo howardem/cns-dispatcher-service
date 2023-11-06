@@ -1,13 +1,14 @@
-package om.polarbookshop.dispatcher.function;
+package com.polarbookshop.dispatcher.function;
 
 import java.util.function.Function;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import com.polarbookshop.dispatcher.event.OrderAcceptedMessage;
+import com.polarbookshop.dispatcher.event.OrderDispatchedMessage;
+
 import lombok.extern.slf4j.Slf4j;
-import om.polarbookshop.dispatcher.event.OrderAcceptedMessage;
-import om.polarbookshop.dispatcher.event.OrderDispatchedMessage;
 import reactor.core.publisher.Flux;
 
 @Configuration

@@ -1,4 +1,4 @@
-package om.polarbookshop.dispatcher.event;
+package com.polarbookshop.dispatcher.event;
 
 public record OrderDispatchedMessage(Long orderId) {
 

@@ -1,4 +1,4 @@
-package om.polarbookshop.dispatcher;
+package com.polarbookshop.dispatcher;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -10,8 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.function.context.FunctionCatalog;
 import org.springframework.cloud.function.context.test.FunctionalSpringBootTest;
 
-import om.polarbookshop.dispatcher.event.OrderAcceptedMessage;
-import om.polarbookshop.dispatcher.event.OrderDispatchedMessage;
+import com.polarbookshop.dispatcher.event.OrderAcceptedMessage;
+import com.polarbookshop.dispatcher.event.OrderDispatchedMessage;
+
 import reactor.core.publisher.Flux;
 import reactor.test.StepVerifier;
 
